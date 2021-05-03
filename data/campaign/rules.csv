@@ -1,0 +1,19 @@
+id,trigger,conditions,script,text,options,notes,
+stable_buildStationOpt,Stable_AddBuildOptions,,,,40:SL_buildStation:Construct a space station,,
+stable_buildStation,DialogOptionSelected,$option==SL_buildStation,"
+$slBuildType = station 0
+PrintStationCost $slBuildType
+FireBest Stable_StationBuildConfirmOptions
+",,,
+
+stable_confirmOptsStation,Stable_StationBuildConfirmOptions,CheckStationBuild $slBuildType,,,"
+StationbuildProceed:Proceed
+SL_cancelBuild:Never mind",,,
+
+stable_confirmOptsCantStation,Stable_StationBuildConfirmOptions,!CheckStationBuild $slBuildType,SetEnabled StationbuildProceed false,,"
+StationbuildProceed:Proceed
+SL_cancelBuild:Never mind",,,
+
+stable_buildProceedStation,DialogOptionSelected,$option == StationbuildProceed,"
+StationBuild $slBuildType
+",,,
