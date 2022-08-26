@@ -114,7 +114,7 @@ public class StationBuild extends BaseCommandPlugin
     public void removeBuildCosts()
     {
         CargoAPI cargo = Global.getSector().getPlayerFleet().getCargo();
-        for(Map.Entry<String, Number> cost : Utilities.getCost("consumed").entrySet()){
+        for(Map.Entry<String, Number> cost : Utilities.getCost("station", "consumed").entrySet()){
             cargo.removeCommodity((String)cost.getKey(), (float)cost.getValue());
         }
     }

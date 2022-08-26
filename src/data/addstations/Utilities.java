@@ -10,10 +10,10 @@ import java.util.*;
 
 public class Utilities {
     @SuppressWarnings("unchecked")
-    public static Map<String, Number> getCost(String type){
+    public static Map<String, Number> getCost(String structureType, String resourceType){
         Map<String, Number> costs = new HashMap<>();
         try {
-            JSONObject consumed = Global.getSettings().getJSONObject("addstation").getJSONObject(type);
+            JSONObject consumed = Global.getSettings().getJSONObject("addstation").getJSONObject(structureType).getJSONObject(resourceType);
             Iterator<String> keys = consumed.keys();
             while(keys.hasNext()){
                 String key = keys.next();
@@ -39,11 +39,11 @@ public class Utilities {
 
     public static boolean canBuildStation(){
         if(Global.getSettings().isDevMode()) return true;
-        for(Map.Entry<String, Number> cost : Utilities.getCost("required").entrySet()){
+        for(Map.Entry<String, Number> cost : Utilities.getCost("station","required").entrySet()){
             CargoAPI cargo = Global.getSector().getPlayerFleet().getCargo();
             if (cargo.getCommodityQuantity(cost.getKey()) < (float)cost.getValue()) return false;
         }
-        for(Map.Entry<String, Number> cost : Utilities.getCost("consumed").entrySet()){
+        for(Map.Entry<String, Number> cost : Utilities.getCost("station", "consumed").entrySet()){
             CargoAPI cargo = Global.getSector().getPlayerFleet().getCargo();
             if (cargo.getCommodityQuantity(cost.getKey()) < (float)cost.getValue()) return false;
         }

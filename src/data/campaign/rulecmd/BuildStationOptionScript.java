@@ -22,7 +22,7 @@ public class BuildStationOptionScript extends BaseCommandPlugin{
         OptionPanelAPI opts = dialog.getOptionPanel();
         opts.clearOptions();
 
-        Map<String, Number> required = Utilities.getCost("required");
+        Map<String, Number> required = Utilities.getCost("station", "required");
         if(required.size() == 0){
             text.addPara("Create a station does not require any objective.");
         }
@@ -37,7 +37,7 @@ public class BuildStationOptionScript extends BaseCommandPlugin{
             Utilities.setCostPanel(dialog, requiredCostPanel.toArray());
         }
 
-        Map<String, Number> consumed = Utilities.getCost("consumed");
+        Map<String, Number> consumed = Utilities.getCost("station", "consumed");
         if(consumed.size() == 0){
             text.addPara("Create a station does not consume any objective.");
         }
