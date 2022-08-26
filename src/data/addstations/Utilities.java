@@ -36,4 +36,17 @@ public class Utilities {
             i += 9;
         }
     }
+
+    public static boolean canBuildStation(){
+        if(Global.getSettings().isDevMode()) return true;
+        for(Map.Entry<String, Number> cost : Utilities.getCost("required").entrySet()){
+            CargoAPI cargo = Global.getSector().getPlayerFleet().getCargo();
+            if (cargo.getCommodityQuantity(cost.getKey()) < (float)cost.getValue()) return false;
+        }
+        for(Map.Entry<String, Number> cost : Utilities.getCost("consumed").entrySet()){
+            CargoAPI cargo = Global.getSector().getPlayerFleet().getCargo();
+            if (cargo.getCommodityQuantity(cost.getKey()) < (float)cost.getValue()) return false;
+        }
+        return true;
+    }
 }

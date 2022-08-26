@@ -1,22 +1,26 @@
 package data.campaign.rulecmd;
 
-import com.fs.starfarer.api.campaign.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import com.fs.starfarer.api.campaign.InteractionDialogAPI;
+import com.fs.starfarer.api.campaign.OptionPanelAPI;
+import com.fs.starfarer.api.campaign.TextPanelAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.impl.campaign.rulecmd.BaseCommandPlugin;
 import com.fs.starfarer.api.util.Misc;
 
 import data.addstations.Utilities;
 
-import java.util.*;
+public class BuildStationOptionScript extends BaseCommandPlugin{
 
-public class PrintStationCost extends BaseCommandPlugin
-{
     @Override
     public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Misc.Token> params, Map<String, MemoryAPI> memoryMap)
     {
-        if(dialog == null) return false;
-
         TextPanelAPI text = dialog.getTextPanel();
+        OptionPanelAPI opts = dialog.getOptionPanel();
+        opts.clearOptions();
 
         Map<String, Number> required = Utilities.getCost("required");
         if(required.size() == 0){
@@ -47,6 +51,9 @@ public class PrintStationCost extends BaseCommandPlugin
             }
             Utilities.setCostPanel(dialog, consumedCostPanel.toArray());
         }
+        opts.addOption("Proceed", "AddBuildStationProceedOption");
+        opts.setEnabled("AddBuildStationProceedOption", Utilities.canBuildStation());
+        opts.addOption("Back", "SL_cancelBuild");
 
         return true;
     }
