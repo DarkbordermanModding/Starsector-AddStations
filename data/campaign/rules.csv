@@ -1,6 +1,6 @@
 id,trigger,conditions,script,text,options,notes
 BuildStationOption,Stable_AddBuildOptions,,,,40:AddBuildStationSelectedOption:Construct a space station,
-#AddBuildGateOption,Stable_AddBuildOptions,,,,50:AddBuildGateSelectedOption:Construct a gate,
-
 AddBuildStationSelectedOption,DialogOptionSelected,$option==AddBuildStationSelectedOption,BuildStationOptionScript,,,
 AddBuildStationProceedOption,DialogOptionSelected,$option==AddBuildStationProceedOption,StationBuild,,,
+
+#AddBuildGateOption,Stable_AddBuildOptions,,,,50:AddBuildGateSelectedOption:Construct a gate,

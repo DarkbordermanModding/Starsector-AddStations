@@ -25,10 +25,8 @@ public class StationBuild extends BaseCommandPlugin
     {
         if(dialog == null) return false;
 
-        // Can be improved by selecting many kind of stations
         SectorEntityToken token = dialog.getInteractionTarget();
-        String constructionType = "station_side03";
-        SectorEntityToken built = build(constructionType, token);
+        SectorEntityToken built = build(token);
         if(!Global.getSettings().isDevMode()) removeBuildCosts();
         dialog.dismiss();
         // BIG WARNING
@@ -41,7 +39,7 @@ public class StationBuild extends BaseCommandPlugin
         return true;
     }
 
-    public SectorEntityToken build(String type, SectorEntityToken token){
+    public SectorEntityToken build(SectorEntityToken token){
         LocationAPI loc = token.getContainingLocation();
 
         // Identity suffix
@@ -51,7 +49,7 @@ public class StationBuild extends BaseCommandPlugin
         SectorEntityToken built = loc.addCustomEntity(
             "station_" + suffix,
             "Side station",
-            type,
+            "station_side03",
             token.getFaction().getId()
         );
         if (token.getOrbit() != null) built.setOrbit(token.getOrbit().makeCopy());
@@ -79,15 +77,15 @@ public class StationBuild extends BaseCommandPlugin
         JSONArray conditions = new JSONArray();
         boolean freePort = false;
         try {
-            industries = Global.getSettings().getJSONObject("addstation").getJSONArray("industries");
-            conditions = Global.getSettings().getJSONObject("addstation").getJSONArray("conditions");
+            industries = Global.getSettings().getJSONObject("addstation").getJSONObject("station").getJSONArray("industries");
+            conditions = Global.getSettings().getJSONObject("addstation").getJSONObject("station").getJSONArray("conditions");
             for(int i = 0; i < conditions.length(); i++){
                 market.addCondition(conditions.getString(i));
             }
             for(int i = 0; i < industries.length(); i++){
                 market.addIndustry(industries.getString(i));
             }
-            freePort = Global.getSettings().getJSONObject("addstation").getBoolean("free_port");
+            freePort = Global.getSettings().getJSONObject("addstation").getJSONObject("station").getBoolean("free_port");
             market.setFreePort(freePort);
         } catch (Exception e) {}
 

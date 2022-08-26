@@ -17,6 +17,15 @@
                 "spaceport"
             ],
             "free_port": true
+        },
+        "gate":{
+            "required": {
+                "heavy_machinery": 500.0
+            },
+            "consumed": {
+                "supplies": 500.0,
+                "metals": 1000.0
+            }
         }
     },
     "ruleCommandPackages":[
