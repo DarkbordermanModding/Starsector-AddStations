@@ -1,7 +1,10 @@
 package data.campaign.rulecmd;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.campaign.*;
+import com.fs.starfarer.api.campaign.CargoAPI;
+import com.fs.starfarer.api.campaign.InteractionDialogAPI;
+import com.fs.starfarer.api.campaign.LocationAPI;
+import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Entities;
 import com.fs.starfarer.api.impl.campaign.rulecmd.BaseCommandPlugin;
@@ -9,8 +12,8 @@ import com.fs.starfarer.api.util.Misc;
 
 import data.addstations.Utilities;
 
-import java.util.*;
 import java.util.List;
+import java.util.Map;
 
 public class StarGateBuild extends BaseCommandPlugin
 {
@@ -19,7 +22,6 @@ public class StarGateBuild extends BaseCommandPlugin
     {
         if(dialog == null) return false;
 
-        // Can be improved by selecting many kind of stations
         SectorEntityToken token = dialog.getInteractionTarget();
         build(token);
         if(!Global.getSettings().isDevMode()) removeBuildCosts();
