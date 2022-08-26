@@ -32,7 +32,12 @@ public class StarGateBuild extends BaseCommandPlugin
     public SectorEntityToken build(SectorEntityToken token){
         LocationAPI loc = token.getContainingLocation();
 
-        SectorEntityToken built = loc.addCustomEntity("gateA", "NAme", Entities.INACTIVE_GATE, token.getFaction().getId());
+        SectorEntityToken built = loc.addCustomEntity(
+            "gate_" + token.getStarSystem().getId(),
+            token.getStarSystem().getNameWithTypeShort() + " Gate",
+            Entities.INACTIVE_GATE,
+            token.getFaction().getId()
+        );
         if (token.getOrbit() != null) built.setOrbit(token.getOrbit().makeCopy());
         built.setLocation(token.getLocation().x, token.getLocation().y);
         built.getMemoryWithoutUpdate().set("$originalStableLocation", built);

@@ -49,4 +49,17 @@ public class Utilities {
         }
         return true;
     }
+
+    public static boolean canBuildGate(){
+        if(Global.getSettings().isDevMode()) return true;
+        for(Map.Entry<String, Number> cost : Utilities.getCost("gate","required").entrySet()){
+            CargoAPI cargo = Global.getSector().getPlayerFleet().getCargo();
+            if (cargo.getCommodityQuantity(cost.getKey()) < (float)cost.getValue()) return false;
+        }
+        for(Map.Entry<String, Number> cost : Utilities.getCost("gate", "consumed").entrySet()){
+            CargoAPI cargo = Global.getSector().getPlayerFleet().getCargo();
+            if (cargo.getCommodityQuantity(cost.getKey()) < (float)cost.getValue()) return false;
+        }
+        return true;
+    }
 }
