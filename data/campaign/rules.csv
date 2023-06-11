@@ -3,6 +3,6 @@ BuildStationOption,Stable_AddBuildOptions,,,,40:AddBuildStationSelectedOption:Co
 AddBuildStationSelectedOption,DialogOptionSelected,$option==AddBuildStationSelectedOption,BuildStationOptionScript,,,
 AddBuildStationProceedOption,DialogOptionSelected,$option==AddBuildStationProceedOption,StationBuild,,,
 
-BuildGateOption,Stable_AddBuildOptions,,,,50:AddBuildGateSelectedOption:Construct a gate,
-AddBuildGateSelectedOption,DialogOptionSelected,$option==AddBuildGateSelectedOption,BuildGateOptionScript,,,
-AddBuildGateProceedOption,DialogOptionSelected,$option==AddBuildGateProceedOption,StarGateBuild,,,
+#BuildGateOption,Stable_AddBuildOptions,,,,50:AddBuildGateSelectedOption:Construct a gate,
+#AddBuildGateSelectedOption,DialogOptionSelected,$option==AddBuildGateSelectedOption,BuildGateOptionScript,,,
+#AddBuildGateProceedOption,DialogOptionSelected,$option==AddBuildGateProceedOption,StarGateBuild,,,
